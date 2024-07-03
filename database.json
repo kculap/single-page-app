@@ -1,0 +1,102 @@
+{
+  "users": [
+    {
+      "firstname": "Admin",
+      "lastname": "Admin",
+      "email": "admin@mail.com",
+      "username": "admin",
+      "password": "0192023a7bbd73250516f069df18b500",
+      "role": "libraryAdmin",
+      "id": "1"
+    },
+    {
+      "firstname": "Foo",
+      "lastname": "Boo",
+      "email": "fooboo@mail.com",
+      "username": "fooboo",
+      "password": "012c5ecd33cbce4dc6af03eca6fcdf70",
+      "role": "user",
+      "id": "2"
+    },
+    {
+      "id": "0bee",
+      "firstname": "Katarina",
+      "lastname": "Ćulap",
+      "email": "kculap@ffos.hr",
+      "username": "kculap",
+      "password": "1fd00d37932ca3cfec3dad38e8f9e677",
+      "role": "user"
+    },
+    {
+      "id": "af05",
+      "firstname": "Marko",
+      "lastname": "Marić",
+      "email": "marko@email.com",
+      "username": "marko",
+      "password": "26c7c9089e23c14396410bbc6675dbdf",
+      "role": "user"
+    }
+  ],
+  "request": [
+    {
+      "id": "3ee9",
+      "room": "Quiet Work",
+      "date": "2024-07-02T22:00:00.000Z",
+      "startTime": 1720029540128,
+      "endTime": 1720029540128,
+      "timeLog": "0 hours and 0 minutes",
+      "username": "kculap",
+      "fullname": "Katarina Ćulap",
+      "approved": true,
+      "status": "done"
+    },
+    {
+      "id": "09c1",
+      "room": "Group Work",
+      "date": "2024-07-07T22:00:00.000Z",
+      "startTime": 1720461960000,
+      "endTime": 1720465620000,
+      "timeLog": "1 hours and 1 minutes",
+      "username": "marko",
+      "fullname": "Marko Marić",
+      "approved": true,
+      "status": "done"
+    },
+    {
+      "id": "41ca",
+      "room": "Quiet Work",
+      "date": "2024-07-01T22:00:00.000Z",
+      "startTime": 1719943680194,
+      "endTime": 1719943740194,
+      "timeLog": "0 hours and 1 minutes",
+      "username": "marko",
+      "fullname": "Marko Marić",
+      "approved": true,
+      "status": "done"
+    },
+    {
+      "id": "f9d3",
+      "room": "Group Work",
+      "date": "2024-07-01T22:00:00.000Z",
+      "startTime": 1719945900030,
+      "endTime": 1719945960030,
+      "timeLog": "0 hours and 1 minutes",
+      "username": "kculap",
+      "fullname": "Katarina Ćulap",
+      "approved": true,
+      "status": "done"
+    },
+    {
+      "id": "3c8e",
+      "room": "Quiet Work",
+      "date": "2024-07-09T22:00:00.000Z",
+      "startTime": 1720637040929,
+      "endTime": 1720637100929,
+      "timeLog": "0 hours and 1 minutes",
+      "username": "kculap",
+      "fullname": "Katarina Ćulap",
+      "approved": false,
+      "status": "done"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+.el-timeline-item__timestamp {
+  color: white !important;
+}
+
+.el-empty__description p {
+  color: white !important;
+}
+
+.el-progress__text {
+  color: var(--main-color) !important;
+}
+
+.el-calendar__header {
+  background-color: var(--main-color);
+}
+
+.el-calendar-day {
+  color: black;
+}
