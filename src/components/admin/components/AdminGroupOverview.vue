@@ -48,8 +48,8 @@ async function getTodayAppointments() {
     );
   } catch (error) {
     ElNotification({
-      title: 'Geting requests error',
-      message: 'Error occured while geting requests.',
+      title: 'Greška prilikom dohvaćanja zahtjeva',
+      message: 'Pojavila se greška prilikom dohvaćanja zahtjeva.',
       duration: 3000,
       type: 'error',
     });
@@ -67,8 +67,8 @@ async function getCalendarRequests() {
     calendarAppointments.value = response.data;
   } catch (error) {
     ElNotification({
-      title: 'Geting requests error',
-      message: 'Error occured while geting requests.',
+      title: 'Pojavila se greška',
+      message: 'Pojavila se greška prilikom dohvaćanja zahtjeva',
       duration: 3000,
       type: 'error',
     });
@@ -83,9 +83,12 @@ function differenceInMinutes(endTime) {
 </script>
 
 <template>
-  <ElEmpty v-if="loading.todayAppointments" description="No appointments" />
+    
+
+  <ElEmpty v-if="loading.todayAppointments" description="Nema rezerviranih termina" />
   <div class="main-appointments-container" v-else>
-    <h4>Live status</h4>
+
+    <h4>Trenutno stanje</h4>
     <ElProgress
       :percentage="progressPercentage"
       :stroke-width="30"
@@ -93,10 +96,10 @@ function differenceInMinutes(endTime) {
       striped-flow
     />
     <span class="progress-subtext">{{
-      `Occupancy: ${liveAppointments.length} / 20`
+      `Zauzetost: ${liveAppointments.length} / 20`
     }}</span>
 
-    <h4>Live members</h4>
+    <h4>Trenutno prijavljeni korisnici</h4>
     <ElTable
       v-if="liveAppointments.length"
       :data="liveAppointments"
@@ -104,20 +107,20 @@ function differenceInMinutes(endTime) {
       border
       fit
     >
-      <ElTableColumn prop="fullname" label="Fullname" sortable />
-      <ElTableColumn prop="username" label="Username" sortable />
-      <ElTableColumn prop="startTime" label="Starting time" sortable>
+      <ElTableColumn prop="fullname" label="Ime i prezime" sortable />
+      <ElTableColumn prop="username" label="Korisničko ime" sortable />
+      <ElTableColumn prop="startTime" label="Početak termina" sortable>
         <template #default="appointments">
           {{ formatToTime(appointments.row.startTime) }}
         </template>
       </ElTableColumn>
-      <ElTableColumn prop="endTime" label="Ending time" sortable>
+      <ElTableColumn prop="endTime" label="Završetak" sortable>
         <template #default="appointments">
           {{ formatToTime(appointments.row.endTime) }}
         </template>
       </ElTableColumn>
-      <ElTableColumn prop="timeLog" label="Time log" sortable />
-      <ElTableColumn label="Ends in">
+      <ElTableColumn prop="timeLog" label="Trajanje termina" sortable />
+      <ElTableColumn label="Završava za">
         <template #default="appointments">
           {{
             `${differenceInMinutes(appointments.row.endTime).toFixed(0)} min`
@@ -125,9 +128,9 @@ function differenceInMinutes(endTime) {
         </template>
       </ElTableColumn>
     </ElTable>
-    <ElEmpty v-else description="No appointments at the moment" />
+    <ElEmpty v-else description="Trenutno nema rezerviranih termina" />
 
-    <h4>Day information</h4>
+    <h4>Kalendar</h4>
     <div class="calendar-wrapper">
       <ElCalendar v-model="calendarDate" class="calendar" />
     </div>
@@ -138,20 +141,20 @@ function differenceInMinutes(endTime) {
       border
       fit
     >
-      <ElTableColumn prop="fullname" label="Fullname" sortable />
-      <ElTableColumn prop="username" label="Username" sortable />
-      <ElTableColumn prop="startTime" label="Starting time" sortable>
+      <ElTableColumn prop="fullname" label="Ime" sortable />
+      <ElTableColumn prop="username" label="Korisničo ime" sortable />
+      <ElTableColumn prop="startTime" label="Početak termina" sortable>
         <template #default="appointments">
           {{ formatToTime(appointments.row.startTime) }}
         </template>
       </ElTableColumn>
-      <ElTableColumn prop="endTime" label="Ending time" sortable>
+      <ElTableColumn prop="endTime" label="Kraj termina" sortable>
         <template #default="appointments">
           {{ formatToTime(appointments.row.endTime) }}
         </template>
       </ElTableColumn>
-      <ElTableColumn prop="timeLog" label="Time log" sortable />
-      <ElTableColumn label="Ends in">
+      <ElTableColumn prop="timeLog" label="Trajanje termina" sortable />
+      <ElTableColumn label="Završava za">
         <template #default="appointments">
           {{
             `${differenceInMinutes(appointments.row.endTime).toFixed(0)} min`
@@ -159,7 +162,7 @@ function differenceInMinutes(endTime) {
         </template>
       </ElTableColumn>
     </ElTable>
-    <ElEmpty v-else description="No appointments for selected date" />
+    <ElEmpty v-else description="Nema rezerviranih termina za odabrani datum" />
   </div>
 </template>
 

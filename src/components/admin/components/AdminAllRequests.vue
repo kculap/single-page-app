@@ -43,8 +43,8 @@ async function getRequests() {
     requests.value = response.data;
   } catch (error) {
     ElNotification({
-      title: 'Geting requests error',
-      message: 'Error occured while geting requests.',
+      title: 'Greška prilikom dohvaćanja zahtjeva',
+      message: 'Pojavila se greška prilikom dohvaćanja zahtjeva.',
       duration: 3000,
       type: 'error',
     });
@@ -80,8 +80,8 @@ async function deleteRequest() {
     getRequests();
   } catch (error) {
     ElNotification({
-      title: 'Request delete error',
-      message: 'Error occured while deleting request.',
+      title: 'Greška prilikom brisanja',
+      message: 'Pojavila se greška prilikom brisanja zahtjeva.',
       duration: 3000,
       type: 'error',
     });
@@ -100,20 +100,21 @@ function scrollToTop() {
 </script>
 
 <template>
-  <ElEmpty v-if="!loading && !requests?.length" description="No requests" />
+  <ElEmpty v-if="!loading && !requests?.length" description="Nema zahtjeva" />
   <div class="request-cards-container" v-else>
+  <h3>Svi zahtjevi</h3>
     <div
       v-bind:key="request.id"
       v-for="request in requests"
       class="request-card"
     >
-      <span>Room: {{ request.room }}</span>
-      <span>Username: {{ request.username }}</span>
-      <span>Fullname: {{ request.fullname }}</span>
-      <span>Date: {{ formatToDate(request.date) }}</span>
-      <span>Starting time: {{ formatToTime(request.startTime) }}</span>
-      <span>Ending time: {{ formatToTime(request.endTime) }}</span>
-      <span>Log time: {{ request.timeLog }}</span>
+      <span>Prostorija: {{ request.room }}</span>
+      <span>Korisničko ime: {{ request.username }}</span>
+      <span>Ime i prezime: {{ request.fullname }}</span>
+      <span>Datum: {{ formatToDate(request.date) }}</span>
+      <span>Početak termina: {{ formatToTime(request.startTime) }}</span>
+      <span>Kraj termina: {{ formatToTime(request.endTime) }}</span>
+      <span>Trajanje termina: {{ request.timeLog }}</span>
       <div class="status-container">
         <span class="color-white">Status:</span>
         <ElIcon
@@ -136,23 +137,23 @@ function scrollToTop() {
         </ElIcon>
         <span class="color-white">{{
           request.status === 'waiting'
-            ? 'Waiting'
+            ? 'Na čekanju'
             : request.approved
-              ? 'Approved'
-              : 'Not Approved'
+              ? 'Zahtjev odobren'
+              : 'Zahtjev odbijen'
         }}</span>
       </div>
       <span v-if="nowTimestamp < request.startTime" style="color: #67c23a"
-        >-- Upcoming --</span
+        >-- Nadolazi --</span
       >
       <span
         v-else-if="
           nowTimestamp >= request.startTime && nowTimestamp <= request.endTime
         "
         class="color-black"
-        >-- In progress --</span
+        >-- U tijeku --</span
       >
-      <span v-else style="color: #f56c6c">-- Completed --</span>
+      <span v-else style="color: #f56c6c">-- Završeno --</span>
       <div class="button-footer-container">
         <ElButton type="danger" plain @click="openDeleteDialog(request)">
           <ElIcon><DeleteFilled /></ElIcon>
@@ -169,11 +170,11 @@ function scrollToTop() {
     />
   </div>
 
-  <ElDialog v-model="deleteDialog.open" title="Delete Request" width="500">
+  <ElDialog v-model="deleteDialog.open" title="Obriši zahtjev" width="500">
     <div class="dialog-card">
-      <span> Room: {{ deleteDialog.request?.room }} </span>
+      <span> Prostorija: {{ deleteDialog.request?.room }} </span>
       <span>
-        Date:
+        Datum:
         {{
           deleteDialog.request
             ? formatToDate(deleteDialog.request?.date)
@@ -181,7 +182,7 @@ function scrollToTop() {
         }}
       </span>
       <span>
-        Starting time:
+        Početak:
         {{
           deleteDialog.request
             ? formatToTime(deleteDialog.request?.startTime)
@@ -189,14 +190,14 @@ function scrollToTop() {
         }}
       </span>
       <span>
-        Ending time:
+        Završetak
         {{
           deleteDialog.request
             ? formatToTime(deleteDialog.request?.endTime)
             : undefined
         }}
       </span>
-      <span> Log time: {{ deleteDialog.request?.timeLog }} </span>
+      <span> Trajanje termina: {{ deleteDialog.request?.timeLog }} </span>
       <div class="status-container">
         <span>Status:</span>
         <ElIcon
@@ -206,13 +207,13 @@ function scrollToTop() {
           <CircleCheckFilled v-if="deleteDialog.request?.approved" />
         </ElIcon>
         <span>{{
-          deleteDialog.request?.approved ? 'Approved' : 'Not Approved'
+          deleteDialog.request?.approved ? 'Zatjev odobren' : 'Zahtjev odbijen'
         }}</span>
       </div>
       <span
         v-if="nowTimestamp < deleteDialog.request?.startTime"
         style="color: #67c23a"
-        >-- Upcoming --</span
+        >-- Nadolazi --</span
       >
       <span
         v-else-if="
@@ -220,15 +221,15 @@ function scrollToTop() {
           nowTimestamp <= deleteDialog.request?.endTime
         "
         class="color-black"
-        >-- In progress --</span
+        >-- U tijeku --</span
       >
-      <span v-else style="color: #f56c6c">-- Completed --</span>
+      <span v-else style="color: #f56c6c">-- Završeno --</span>
     </div>
     <template #footer>
-      <ElButton plain @click="deleteDialog.open = false">Cancel</ElButton>
+      <ElButton plain @click="deleteDialog.open = false">Natrag</ElButton>
       <ElButton plain type="danger" @click="deleteRequest">
         <ElIcon style="margin-right: 5px"><DeleteFilled /></ElIcon>
-        Delete
+        Obriši
       </ElButton>
     </template>
   </ElDialog>

@@ -34,22 +34,22 @@ function logout() {
         </div>
         <div class="user-header-part">
           <ElLink class="color-white" :class="{ 'active-link': tab === 'Dashboard' }" @click="tab = 'Dashboard'">
-            Dashboard
+            Početna
           </ElLink>
           <ElLink class="color-white" :class="{ 'active-link': tab === 'New Appointment' }" @click="tab = 'New Appointment'">
-            New Appointment
+            Rezervacija
           </ElLink>
           <ElLink class="color-white" :class="{ 'active-link': tab === 'User Details' }" @click="tab = 'User Details'">
             {{ userData.username }}
           </ElLink>
         </div>
         <div class="user-header-part">
-          <ElButton type="primary" plain @click="logout"> Logout </ElButton>
+          <ElButton type="primary" plain @click="logout"> Odjava </ElButton>
         </div>
       </div>
     </ElHeader>
     <ElMain>
-      <h3>{{ tab }}</h3>
+      
       <UserDetails v-if="tab === 'User Details'" />
       <UserNewAppointment
         v-else-if="tab === 'New Appointment'"

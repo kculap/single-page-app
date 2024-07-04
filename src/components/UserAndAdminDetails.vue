@@ -19,36 +19,36 @@ function savePasswordHandler() {
 function checkPassword() {
   if (passwordForm.value.newPassword.length < 8)
     return ElNotification({
-      title: 'Password error',
-      message: 'Password is too short. Minimum length is 8 chars.',
+      title: 'Greška u lozinci',
+      message: 'Lozinka je prekratka. Najmanje dopušteni broj znakova je 8.',
       duration: 3000,
       type: 'error',
     });
   else if (passwordForm.value.newPassword.length > 30)
     return ElNotification({
-      title: 'Password error',
-      message: 'Password is too long. Maximum length is 30 chars.',
+      title: 'Greška u lozinci',
+      message: 'Lozinka je preduga. Najveći dopušteni broj znakova je 30.',
       duration: 3000,
       type: 'error',
     });
   else if (!passwordRegex.test(passwordForm.value.newPassword))
     return ElNotification({
-      title: 'Password error',
-      message: 'Password must contain at least 1 letter and 1 number.',
+      title: 'Greška u lozinci',
+      message: 'Lozinka mora sadržavati najmanje jedno slovo i jedan broj.',
       duration: 3000,
       type: 'error',
     });
   else if (!passwordRegex.test(passwordForm.value.newPassword))
     return ElNotification({
-      title: 'Password error',
-      message: 'Password must contain at least 1 letter and 1 number.',
+      title: 'Greška u lozinci',
+      message: 'Lozinka mora sadržavati najmanje jedno slovo i jedan broj.',
       duration: 3000,
       type: 'error',
     });
   else if (passwordForm.value.newPassword !== passwordForm.value.repeatPassword)
     return ElNotification({
-      title: 'Password error',
-      message: 'Passwords do not match.',
+      title: 'Greška u lozinci',
+      message: 'Lozinke se ne podudaraju',
       duration: 3000,
       type: 'error',
     });
@@ -62,8 +62,8 @@ async function savePassword() {
     );
     localStorage.setItem('userData', JSON.stringify(response.data));
     ElNotification({
-      title: 'Password saved',
-      message: 'Password saved successfully.',
+      title: 'Lozinka promijenjena',
+      message: 'Lozinka je uspješno promijenjena',
       duration: 3000,
       type: 'success',
     });
@@ -71,8 +71,8 @@ async function savePassword() {
     passwordForm.value.repeatPassword = '';
   } catch (error) {
     ElNotification({
-      title: 'Password change error',
-      message: 'Password change error occured.',
+      title: 'Greška prilikom promjene lozinke',
+      message: 'Pojavila se greška prilikom promjene lozinke. Pokušajte ponovo.',
       duration: 3000,
       type: 'error',
     });
@@ -82,38 +82,39 @@ async function savePassword() {
 
 <template>
   <div class="user-details-container">
-    <span> {{ `Username: ${userData.username}` }} </span>
-    <span> {{ `Firstname: ${userData.firstname}` }} </span>
-    <span> {{ `Lastname: ${userData.lastname}` }} </span>
+  <h3>Detalji</h3>
+    <span> {{ `Korisničko ime: ${userData.username}` }} </span>
+    <span> {{ `Ime: ${userData.firstname}` }} </span>
+    <span> {{ `Prezime: ${userData.lastname}` }} </span>
     <span> {{ `Email: ${userData.email}` }} </span>
     <span>
-      {{ `Role: ${userData.role[0].toUpperCase()}${userData.role.slice(1)}` }}
+      {{ `Uloga: ${userData.role[0].toUpperCase()}${userData.role.slice(1)}` }}
     </span>
   </div>
   <div class="change-pass-container user-details-container">
     <div class="flex-column">
-      <span>New Password</span>
+      <span>Nova lozinka</span>
       <ElInput
         v-model="passwordForm.newPassword"
         class="input"
-        placeholder="Password"
+        placeholder="Lozinka"
         show-password
         @keydown.enter="savePasswordHandler"
       />
     </div>
     <div class="flex-column">
-      <span>Repeat Password</span>
+      <span>Ponovite lozinku</span>
       <ElInput
         v-model="passwordForm.repeatPassword"
         class="input"
-        placeholder="Repeat Password"
+        placeholder="Ponovite lozinku"
         show-password
         @keydown.enter="savePasswordHandler"
       />
     </div>
     <div class="flex-column">
       <ElButton type="primary" class="button" plain @click="savePasswordHandler"
-        >Save</ElButton
+        >Spremi</ElButton
       >
     </div>
   </div>

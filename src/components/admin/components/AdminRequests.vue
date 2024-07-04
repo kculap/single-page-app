@@ -28,8 +28,8 @@ async function getRequests() {
     requests.value = response.data;
   } catch (error) {
     ElNotification({
-      title: 'Geting requests error',
-      message: 'Error occured while geting requests.',
+      title: 'Greška prilikom dohvaćanja zahtjeva',
+      message: 'Dogodila se greška prilikom dohvaćanja zahtjeva',
       duration: 3000,
       type: 'error',
     });
@@ -67,8 +67,8 @@ async function saveRequest(request) {
     getRequests();
   } catch (error) {
     ElNotification({
-      title: 'Saving request error',
-      message: 'Error occured while saving requests changes.',
+      title: 'Greška prilikom spremanja',
+      message: 'Pojavila se greška prilikom spremanja promjena',
       duration: 3000,
       type: 'error',
     });
@@ -77,26 +77,27 @@ async function saveRequest(request) {
 </script>
 
 <template>
-  <ElEmpty v-if="!loading && !requests?.length" description="No requests" />
+<h3>Novi zahtjevi</h3>
+  <ElEmpty v-if="!loading && !requests?.length" description="Nema novih zahtjeva" />
   <div class="request-cards-container" v-else>
     <div
       v-bind:key="request.id"
       v-for="request in requests"
       class="request-card"
     >
-      <span>Room: {{ request.room }}</span>
-      <span>Username: {{ request.username }}</span>
-      <span>Fullname: {{ request.fullname }}</span>
-      <span>Date: {{ formatToDate(request.date) }}</span>
-      <span>Starting time: {{ formatToTime(request.startTime) }}</span>
-      <span>Ending time: {{ formatToTime(request.endTime) }}</span>
-      <span>Log time: {{ request.timeLog }}</span>
+      <span>Prostorija: {{ request.room }}</span>
+      <span>Korisničko ime: {{ request.username }}</span>
+      <span>Ime: {{ request.fullname }}</span>
+      <span>Datum: {{ formatToDate(request.date) }}</span>
+      <span>Početak termina: {{ formatToTime(request.startTime) }}</span>
+      <span>Kraj termina: {{ formatToTime(request.endTime) }}</span>
+      <span>Trajanje termina: {{ request.timeLog }}</span>
       <div class="button-footer-container">
         <ElButton type="danger" plain @click="rejectRequestHandler(request)">
-          Reject
+          Odbij zahtjev
         </ElButton>
         <ElButton type="success" plain @click="approveRequestHandler(request)">
-          Approve
+          Prihvati zahtjev
         </ElButton>
       </div>
     </div>

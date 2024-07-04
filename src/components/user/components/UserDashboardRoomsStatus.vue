@@ -26,8 +26,8 @@ async function getQuietRoomState() {
     roomsState.value.quiet = response.data.filter((appointment) => nowTimestamp >= appointment.startTime && nowTimestamp <= appointment.endTime).length
   } catch (error) {
     ElNotification({
-      title: 'Geting quiet room appointments error',
-      message: 'Error occured while geting quiet room appointments.',
+      title: 'Greška',
+      message: 'Pojavila se greška prilikom dohvaćanja termina za prostoriju Tihi rad',
       duration: 3000,
       type: 'error',
     });
@@ -42,8 +42,8 @@ async function getGroupRoomState() {
     roomsState.value.group = response.data.filter((appointment) => nowTimestamp >= appointment.startTime && nowTimestamp <= appointment.endTime).length
   } catch (error) {
     ElNotification({
-      title: 'Geting group room appointments error',
-      message: 'Error occured while geting group room appointments.',
+      title: 'Greška',
+      message: 'Pojavila se greška prilikom dohvaćanja termina za prostoiju Grupni rad',
       duration: 3000,
       type: 'error',
     });
@@ -58,8 +58,8 @@ async function getReadingRoomState() {
     roomsState.value.reading = response.data.filter((appointment) => nowTimestamp >= appointment.startTime && nowTimestamp <= appointment.endTime).length
   } catch (error) {
     ElNotification({
-      title: 'Geting reading room appointments error',
-      message: 'Error occured while geting reading room appointments.',
+      title: 'Greška',
+      message: 'Pojavila se greška priliko dohvaćanja termina za prostoriju Čitaonica.',
       duration: 3000,
       type: 'error',
     });
@@ -68,8 +68,9 @@ async function getReadingRoomState() {
 </script>
 
 <template>
+<h3>Početna</h3>
     <div class="rooms-status-container">
-        <span class="room-label">Quiet Work Room Live State - <span class="main-color">{{ `${roomsState.quiet}/20` }}</span></span>
+        <span class="room-label">Trenutno stanje u prostoriji za tihi rad - <span class="main-color">{{ `${roomsState.quiet}/20` }}</span></span>
         <ElProgress
             :percentage="(100 / 20) * roomsState.quiet"
             :stroke-width="30"
@@ -77,7 +78,7 @@ async function getReadingRoomState() {
             striped-flow
         />
 
-        <span class="room-label">Group Work Room Live State - <span class="main-color">{{ `${roomsState.group}/20` }}</span></span>
+        <span class="room-label">Trenutno stanje u prostoriji za grupni rad - <span class="main-color">{{ `${roomsState.group}/20` }}</span></span>
         <ElProgress
             :percentage="(100 / 20) * roomsState.group"
             :stroke-width="30"
@@ -85,7 +86,7 @@ async function getReadingRoomState() {
             striped-flow
         />
 
-        <span class="room-label">Reading Room Live State - <span class="main-color">{{ `${roomsState.reading}/20` }}</span></span>
+        <span class="room-label">Trenutno stanje u čitaonici - <span class="main-color">{{ `${roomsState.reading}/20` }}</span></span>
         <ElProgress
             :percentage="(100 / 20) * roomsState.reading"
             :stroke-width="30"

@@ -1,6 +1,6 @@
 export function formatToDateTime(time) {
   const date = new Date(time);
-  if (isNaN(date.getTime())) throw new Error('Invalid date format');
+  if (isNaN(date.getTime())) throw new Error('Neispravan format');
 
   let minutes = String(date.getMinutes());
   if (Number(minutes) < 10) minutes = `0${minutes}`;
@@ -10,7 +10,7 @@ export function formatToDateTime(time) {
 
 export function formatToDate(time) {
   const date = new Date(time);
-  if (isNaN(date.getTime())) throw new Error('Invalid date format');
+  if (isNaN(date.getTime())) throw new Error('Neispravan format');
 
   let day: string | number = date.getDate();
   if (day < 10) day = `0${day}`;
@@ -22,7 +22,7 @@ export function formatToDate(time) {
 
 export function formatToTime(time) {
   const date = new Date(time);
-  if (isNaN(date.getTime())) throw new Error('Invalid date format');
+  if (isNaN(date.getTime())) throw new Error('Neispravan format');
 
   let minutes = String(date.getMinutes());
   if (Number(minutes) < 10) minutes = `0${minutes}`;
@@ -32,7 +32,7 @@ export function formatToTime(time) {
 
 export function formatToFilterDate(time) {
   const date = new Date(time);
-  if (isNaN(date.getTime())) throw new Error('Invalid date format');
+  if (isNaN(date.getTime())) throw new Error('Neispravan format');
 
   date.setHours(0);
   date.setMinutes(0);

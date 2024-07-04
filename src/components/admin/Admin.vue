@@ -21,8 +21,8 @@ async function getRequestsNumber() {
     await store.getAdminRequestsNumber();
   } catch (error) {
     ElNotification({
-      title: 'Getting request number error',
-      message: 'Error occured while getting request number.',
+      title: 'Greška prilikom prikaza zahtjeva',
+      message: 'Pojavila se greška prilikom prikaza zahtjeva',
       duration: 3000,
       type: 'error',
     });
@@ -48,14 +48,14 @@ function logout() {
           />
           <ElLink class="color-white" @click="tab = 'User Details'">
             {{
-              `${userData.role[0].toUpperCase()}${userData.role.slice(1)}: ${userData.username}`
+              `${userData.username}`
             }}
           </ElLink>
         </div>
         <div class="user-header-part">
           <ElLink class="color-white" @click="tab = 'New Requests'">
             <span :class="{ 'active-new-request-link': tab === 'New Requests' }"
-              >New Requests</span
+              >Novi zahtjevi</span
             >
             <div v-if="adminRequestsNumber" class="requests-number">
               {{ adminRequestsNumber }}
@@ -66,44 +66,38 @@ function logout() {
             :class="{ 'active-link': tab === 'Requests' }"
             @click="tab = 'Requests'"
           >
-            Requests
+            Zahtjevi
           </ElLink>
           <ElLink
             class="color-white"
             :class="{ 'active-link': tab === 'Quiet Work' }"
             @click="tab = 'Quiet Work'"
           >
-            Quiet Work
+            Tihi rad
           </ElLink>
           <ElLink
             class="color-white"
             :class="{ 'active-link': tab === 'Group Work' }"
             @click="tab = 'Group Work'"
           >
-            Group Work
+            Grupni rad
           </ElLink>
           <ElLink
             class="color-white"
             :class="{ 'active-link': tab === 'Reading Room' }"
             @click="tab = 'Reading Room'"
           >
-            Reading Room
+            Čitaonica
           </ElLink>
-          <ElLink
-            class="color-white"
-            :class="{ 'active-link': tab === 'User Details' }"
-            @click="tab = 'User Details'"
-          >
-            {{ userData.username }}
-          </ElLink>
+          
         </div>
         <div class="user-header-part">
-          <ElButton type="primary" plain @click="logout"> Logout </ElButton>
+          <ElButton type="primary" plain @click="logout"> Odjava </ElButton>
         </div>
       </div>
     </ElHeader>
     <ElMain>
-      <h3>{{ tab }}</h3>
+    
       <AdminRequests v-if="tab === 'New Requests'" />
       <AdminAllRequests v-else-if="tab === 'Requests'" />
       <AdminGroupOverview

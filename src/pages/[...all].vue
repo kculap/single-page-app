@@ -12,6 +12,6 @@ const router = useRouter();
   <br />
   <br />
   <ElButton plain type="primary" @click="router.push('/')"
-    >Go back to dashboard</ElButton
+    >Natrag na početnu</ElButton
   >
 </template>

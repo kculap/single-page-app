@@ -39,63 +39,15 @@
   ],
   "request": [
     {
-      "id": "3ee9",
-      "room": "Quiet Work",
-      "date": "2024-07-02T22:00:00.000Z",
-      "startTime": 1720029540128,
-      "endTime": 1720029540128,
-      "timeLog": "0 hours and 0 minutes",
+      "id": "213b",
+      "room": "Tihi rad",
+      "date": "2024-07-15T22:00:00.000Z",
+      "startTime": 1721124900000,
+      "endTime": 1721127600000,
+      "timeLog": "0 sati i 45 minuta",
       "username": "kculap",
       "fullname": "Katarina Ćulap",
       "approved": true,
-      "status": "done"
-    },
-    {
-      "id": "09c1",
-      "room": "Group Work",
-      "date": "2024-07-07T22:00:00.000Z",
-      "startTime": 1720461960000,
-      "endTime": 1720465620000,
-      "timeLog": "1 hours and 1 minutes",
-      "username": "marko",
-      "fullname": "Marko Marić",
-      "approved": true,
-      "status": "done"
-    },
-    {
-      "id": "41ca",
-      "room": "Quiet Work",
-      "date": "2024-07-01T22:00:00.000Z",
-      "startTime": 1719943680194,
-      "endTime": 1719943740194,
-      "timeLog": "0 hours and 1 minutes",
-      "username": "marko",
-      "fullname": "Marko Marić",
-      "approved": true,
-      "status": "done"
-    },
-    {
-      "id": "f9d3",
-      "room": "Group Work",
-      "date": "2024-07-01T22:00:00.000Z",
-      "startTime": 1719945900030,
-      "endTime": 1719945960030,
-      "timeLog": "0 hours and 1 minutes",
-      "username": "kculap",
-      "fullname": "Katarina Ćulap",
-      "approved": true,
-      "status": "done"
-    },
-    {
-      "id": "3c8e",
-      "room": "Quiet Work",
-      "date": "2024-07-09T22:00:00.000Z",
-      "startTime": 1720637040929,
-      "endTime": 1720637100929,
-      "timeLog": "0 hours and 1 minutes",
-      "username": "kculap",
-      "fullname": "Katarina Ćulap",
-      "approved": false,
       "status": "done"
     }
   ]

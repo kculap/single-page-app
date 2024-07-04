@@ -29,38 +29,38 @@ async function checkData() {
   // Firsname check
   if (registrationData.value.firstname.length < 3)
     return ElNotification({
-      title: 'Firstname error',
-      message: 'Firstname is too short. Minimum length is 3 chars.',
+      title: 'Greška u imenu',
+      message: 'Ime je prekratko. Najmanja dužina znakova je 3',
       duration: 3000,
       type: 'error',
     });
   else if (registrationData.value.firstname.length > 30)
     return ElNotification({
-      title: 'Firstname error',
-      message: 'Firstname is too long. Maximum length is 30 chars.',
+      title: 'Greška u imenu',
+      message: 'Ime je predugačko. Najveća dopuštena dužina znakova je 30',
       duration: 3000,
       type: 'error',
     });
   // Lastname check
   else if (registrationData.value.lastname.length < 3)
     return ElNotification({
-      title: 'Lastname error',
-      message: 'Lastname is too short. Minimum length is 3 chars.',
+      title: 'Greška u prezimenu',
+      message: 'Prezime je prekratko. Najmanja dopuštena dužina je 3 znaka',
       duration: 3000,
       type: 'error',
     });
   else if (registrationData.value.lastname.length > 30)
     return ElNotification({
-      title: 'Lastname error',
-      message: 'Lastname is too long. Maximum length is 30 chars.',
+      title: 'Greška u prezimenu',
+      message: 'Prezime je predugačko. Najveća dopuštena dužina znakova je 30',
       duration: 3000,
       type: 'error',
     });
   // Email check
   else if (!emailRegex.test(registrationData.value.email)) {
     return ElNotification({
-      title: 'Email error',
-      message: 'Wrong email form. Please type valid email.',
+      title: 'Greška u email adresi',
+      message: 'Email adresa ne postoji. Upišite ispravnu email adresu.',
       duration: 3000,
       type: 'error',
     });
@@ -69,37 +69,37 @@ async function checkData() {
   // Username check
   else if (registrationData.value.username.length < 5)
     return ElNotification({
-      title: 'Username error',
-      message: 'Username is too short. Minimum length is 5 chars.',
+      title: 'Greška u korisničkom imenu',
+      message: 'Korisničko ime je prekratko. Najmanja dopuštena dužina je 5 znakova.',
       duration: 3000,
       type: 'error',
     });
   // Password check
   else if (passwordModel.value.length < 8)
     return ElNotification({
-      title: 'Password error',
-      message: 'Password is too short. Minimum length is 8 chars.',
+      title: 'Greška u lozinci',
+      message: 'Lozinka je prekratka. Minimalna dopuštena dužina je 8 znakova.',
       duration: 3000,
       type: 'error',
     });
   else if (passwordModel.value.length > 30)
     return ElNotification({
-      title: 'Password error',
-      message: 'Password is too long. Maximum length is 30 chars.',
+      title: 'Greška u lozinci',
+      message: 'Lozinka je preduga. Najveća dopuštena dužina je 30 znakova',
       duration: 3000,
       type: 'error',
     });
   else if (!passwordRegex.test(passwordModel.value))
     return ElNotification({
-      title: 'Password error',
-      message: 'Password must contain at least 1 letter and 1 number.',
+      title: 'Greška u lozinci',
+      message: 'Lozinka mora sadržavati barem jedno slovo i jedan broj.',
       duration: 3000,
       type: 'error',
     });
   else if (passwordModel.value !== repeatPasswordModel.value)
     return ElNotification({
-      title: 'Password error',
-      message: 'Passwords do not match.',
+      title: 'Greška u lozinci',
+      message: 'Lozinke se ne podudaraju',
       duration: 3000,
       type: 'error',
     });
@@ -112,8 +112,8 @@ async function checkData() {
     if (response.data[0]) {
       isError = true;
       ElNotification({
-        title: 'Email already exist',
-        message: 'This email already exist.',
+        title: 'Email adresa se već koristi',
+        message: 'Korisnik s istom email adresom je već registiran',
         duration: 3000,
         type: 'error',
       });
@@ -121,8 +121,8 @@ async function checkData() {
   } catch (error) {
     isError = true;
     ElNotification({
-      title: 'Error occured',
-      message: 'Something went wrong.',
+      title: 'Pojavila se greška',
+      message: 'Nešto je pošlo po krivu.',
       duration: 3000,
       type: 'error',
     });
@@ -136,8 +136,8 @@ async function checkData() {
     if (response.data[0]) {
       isError = true;
       ElNotification({
-        title: 'Username already exist',
-        message: 'This username already exist.',
+        title: 'Greška s korisničkim imenom',
+        message: 'Korisničko ime koje ste upisali se već koristi',
         duration: 3000,
         type: 'error',
       });
@@ -145,8 +145,8 @@ async function checkData() {
   } catch (error) {
     isError = true;
     ElNotification({
-      title: 'Error occured',
-      message: 'Something went wrong.',
+      title: 'Pojavila se greška',
+      message: 'Nešto je pošlo po krivu',
       duration: 3000,
       type: 'error',
     });
@@ -165,8 +165,8 @@ async function save() {
     emit('checkForPage');
   } catch (error) {
     ElNotification({
-      title: 'Registration error',
-      message: 'Registration error occured.',
+      title: 'Greška u registraciji',
+      message: 'Pojavila se greška prilikom registracije',
       duration: 3000,
       type: 'error',
     });
@@ -176,20 +176,20 @@ async function save() {
 
 <template>
   <div class="registration-container">
-    <h3 class="main-color">Registration</h3>
+    <h3 class="main-color">Registracija</h3>
     <div>
-      <span>Fistname</span>
+      <span>Ime</span>
       <ElInput
         v-model="registrationData.firstname"
-        placeholder="Firstname"
+        placeholder="Ime"
         @keyup.enter="register"
       />
     </div>
     <div>
-      <span>Lastname</span>
+      <span>Prezime</span>
       <ElInput
         v-model="registrationData.lastname"
-        placeholder="Lastname"
+        placeholder="Prezime"
         @keyup.enter="register"
       />
     </div>
@@ -202,35 +202,35 @@ async function save() {
       />
     </div>
     <div>
-      <span>Username</span>
+      <span>Korisničko ime</span>
       <ElInput
         v-model="registrationData.username"
-        placeholder="Username"
+        placeholder="Korisničko ime"
         @keyup.enter="register"
       />
     </div>
     <div>
-      <span>Password</span>
+      <span>Lozinka</span>
       <ElInput
         v-model="passwordModel"
-        placeholder="Password"
+        placeholder="Lozinka"
         show-password
         @keydown.enter="register"
       />
     </div>
     <div>
-      <span>Repeat Password</span>
+      <span>Ponovite lozinku</span>
       <ElInput
         v-model="repeatPasswordModel"
-        placeholder="Repeat Password"
+        placeholder="Ponovite lozinku"
         show-password
         @keydown.enter="register"
       />
     </div>
     <br />
-    <ElButton type="primary" plain @click="register">Register</ElButton>
+    <ElButton type="primary" plain @click="register">Registracija</ElButton>
     <ElLink type="primary" @click="emit('goToLogin')"
-      >Have an account? Go to login</ElLink
+      >Već imate račun? Prijavite se.</ElLink
     >
   </div>
 </template>

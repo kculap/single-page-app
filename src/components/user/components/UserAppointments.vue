@@ -43,8 +43,8 @@ async function getAppointments() {
     appointments.value = response.data;
   } catch (error) {
     ElNotification({
-      title: 'Appointments error',
-      message: 'Error occured while getting my appointments.',
+      title: 'Greška u dohvaćanju zahtjeva',
+      message: 'Pojavila se greška prilikom dohvaćanja zahtjeva',
       duration: 3000,
       type: 'error',
     });
@@ -87,8 +87,8 @@ async function deleteAppointment() {
     getAppointments();
   } catch (error) {
     ElNotification({
-      title: 'Appointment delete error',
-      message: 'Error occured while deleting appointment.',
+      title: 'Greška prilikom brisanja zahtjeva',
+      message: 'Pojavila se greška prilikom brisanja zahtjeva. Pokušajte ponovo.',
       duration: 3000,
       type: 'error',
     });
@@ -99,10 +99,10 @@ async function deleteAppointment() {
 <template>
   <ElEmpty
     v-if="!loading && !appointments.length"
-    description="No appointments"
+    description="Nema poslanih zahtjeva"
   />
   <div v-else>
-    <h3>Appointments</h3>
+    <h3>Zahtjevi</h3>
     <ElTimeline class="timeline">
       <ElTimelineItem
         v-bind:key="appointment.id"
@@ -113,14 +113,14 @@ async function deleteAppointment() {
         size="large"
       >
         <div class="card">
-          <span class="color-white"> Room: {{ appointment.room }} </span>
+          <span class="color-white"> Prostorija: {{ appointment.room }} </span>
           <span class="color-white">
-            Starting time: {{ formatToTime(appointment.startTime) }}
+            Početak: {{ formatToTime(appointment.startTime) }}
           </span>
           <span class="color-white">
-            Ending time: {{ formatToTime(appointment.endTime) }}
+            Završetak: {{ formatToTime(appointment.endTime) }}
           </span>
-          <span class="color-white"> Log time: {{ appointment.timeLog }} </span>
+          <span class="color-white"> Trajanje termina: {{ appointment.timeLog }} </span>
           <div class="status-container">
             <span class="color-white">Status:</span>
             <ElIcon
@@ -145,25 +145,25 @@ async function deleteAppointment() {
             </ElIcon>
             <span class="color-white">{{
               appointment.status === 'waiting'
-                ? 'Waiting'
+                ? 'Na čekanju'
                 : appointment.approved
-                  ? 'Approved'
-                  : 'Not Approved'
+                  ? 'Zahtjev odobren'
+                  : 'Zahtjev odbijen'
             }}</span>
           </div>
           <span
             v-if="nowTimestamp < appointment.startTime"
             style="color: #67c23a"
-            >-- Upcoming --</span
+            >-- Nadolazi --</span
           >
           <span
             v-else-if="
               nowTimestamp >= appointment.startTime &&
               nowTimestamp <= appointment.endTime
             "
-            >-- In progress --</span
+            >-- U tijeku --</span
           >
-          <span v-else style="color: #f56c6c">-- Completed --</span>
+          <span v-else style="color: #f56c6c">-- Završeno --</span>
           <div>
             <ElButton
               type="danger"
@@ -186,11 +186,11 @@ async function deleteAppointment() {
     />
   </div>
 
-  <ElDialog v-model="deleteDialog.open" title="Delete Appointment" width="500">
+  <ElDialog v-model="deleteDialog.open" title="Brisanje zahtjeva" width="500">
     <div class="dialog-card">
-      <span> Room: {{ deleteDialog.appointment?.room }} </span>
+      <span> Prostorija: {{ deleteDialog.appointment?.room }} </span>
       <span>
-        Date:
+        Datum:
         {{
           deleteDialog.appointment
             ? formatToDate(deleteDialog.appointment?.date)
@@ -198,7 +198,7 @@ async function deleteAppointment() {
         }}
       </span>
       <span>
-        Starting time:
+        Početak:
         {{
           deleteDialog.appointment
             ? formatToTime(deleteDialog.appointment?.startTime)
@@ -206,14 +206,14 @@ async function deleteAppointment() {
         }}
       </span>
       <span>
-        Ending time:
+        Završetak:
         {{
           deleteDialog.appointment
             ? formatToTime(deleteDialog.appointment?.endTime)
             : undefined
         }}
       </span>
-      <span> Log time: {{ deleteDialog.appointment?.timeLog }} </span>
+      <span> Trajanje termina: {{ deleteDialog.appointment?.timeLog }} </span>
       <div class="status-container">
         <span>Status:</span>
         <ElIcon
@@ -223,13 +223,13 @@ async function deleteAppointment() {
           <CircleCheckFilled v-if="deleteDialog.appointment?.approved" />
         </ElIcon>
         <span>{{
-          deleteDialog.appointment?.approved ? 'Approved' : 'Not Approved'
+          deleteDialog.appointment?.approved ? 'Zahtjev odobren' : 'Zahtjev odbijen'
         }}</span>
       </div>
       <span
         v-if="nowTimestamp < deleteDialog.appointment?.startTime"
         style="color: #67c23a"
-        >-- Upcoming --</span
+        >-- Nadolazi --</span
       >
       <span
         v-else-if="
@@ -237,15 +237,15 @@ async function deleteAppointment() {
           nowTimestamp <= deleteDialog.appointment?.endTime
         "
         class="color-black"
-        >-- In progress --</span
+        >-- U tijeku --</span
       >
-      <span v-else style="color: #f56c6c">-- Completed --</span>
+      <span v-else style="color: #f56c6c">-- Završeno --</span>
     </div>
     <template #footer>
-      <ElButton plain @click="deleteDialog.open = false">Cancel</ElButton>
+      <ElButton plain @click="deleteDialog.open = false">Natrag</ElButton>
       <ElButton plain type="danger" @click="deleteAppointment">
         <ElIcon style="margin-right: 5px"><DeleteFilled /></ElIcon>
-        Delete
+        Obriši
       </ElButton>
     </template>
   </ElDialog>

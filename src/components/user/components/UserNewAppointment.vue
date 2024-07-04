@@ -8,7 +8,7 @@ const emit = defineEmits(['goToAppointments']);
 const store = useStore();
 const userData = JSON.parse(localStorage.getItem('userData'));
 const appointment = ref({
-  room: 'Quiet Work',
+  room: '',
   date: '',
   startTime: '',
   endTime: '',
@@ -19,9 +19,9 @@ const appointment = ref({
   status: 'waiting',
 });
 const typeOptions = ref([
-  { label: 'Quiet Work', value: 'Quiet Work' },
-  { label: 'Group Work', value: 'Group Work' },
-  { label: 'Reading Room', value: 'Reading Room' },
+  { label: 'Tihi rad', value: 'Tihi rad' },
+  { label: 'Grupni rad', value: 'Grupni rad' },
+  { label: 'Čitaonica', value: 'Čitaonica' },
 ]);
 const selectedRoomState = ref(0);
 const disabledDate = (time) => {
@@ -70,7 +70,7 @@ const timeLog = computed(() => {
   const totalMinutes = Math.floor(differenceInMilliseconds / (1000 * 60));
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
-  return `${hours} hours and ${minutes} minutes`;
+  return `${hours} sati i ${minutes} minuta`;
 });
 const todayIsSelected = computed(() => {
   if (appointment.value.date) {
@@ -98,24 +98,24 @@ async function saveAppointmentHandler() {
     try {
       await store.saveAppointmentRequest(appointment.value);
       ElNotification({
-        title: 'Appointment successfully saved',
-        message: 'Your appointment request successfully saved.',
+        title: 'Zahtjev uspješan',
+        message: 'Zahtjev za rezervacijom je uspješno obavljen te je poslan administratorima.',
         duration: 3000,
         type: 'success',
       });
       emit('goToAppointments');
     } catch (error) {
       ElNotification({
-        title: 'Saving appointment error',
-        message: 'Appointment saving error occured.',
+        title: 'Greška u zahtjevu',
+        message: 'Pojavila se greška prilikom slanja zahtjeva.',
         duration: 3000,
         type: 'error',
       });
     }
   } else
     ElNotification({
-      title: 'Saving appointment error',
-      message: 'Please fill out the form first.',
+      title: 'Greška u zahtjevu',
+      message: 'Potrebno je popuniti sva polja za unos.',
       duration: 3000,
       type: 'error',
     });
@@ -161,8 +161,8 @@ async function checkAppointmentState() {
     ).length;
   } catch (error) {
     ElNotification({
-      title: 'Geting appointment state error',
-      message: 'Error occured while geting appointment state.',
+      title: 'Greška',
+      message: 'Pojavila se greška prilikom prikaza stanja.',
       duration: 3000,
       type: 'error',
     });
@@ -183,12 +183,13 @@ watch(
 </script>
 
 <template>
+<h3>Rezervacija</h3>
   <div class="new-appointment-container">
     <div class="flex-column">
-      <span>Appointment Room</span>
+      <span>Prostorija</span>
       <ElSelect
         v-model="appointment.room"
-        placeholder="Select type"
+        placeholder="Odaberi prostoriju"
         style="width: 220px"
       >
         <ElOption
@@ -200,41 +201,41 @@ watch(
       </ElSelect>
     </div>
     <div class="flex-column">
-      <span>Date</span>
+      <span>Datum</span>
       <ElDatePicker
         v-model="appointment.date"
         type="date"
-        placeholder="Select date"
+        placeholder="Odaberi datum"
         :disabled-date="disabledDate"
         style="width: 220px"
       />
     </div>
     <div class="flex-column">
-      <span>Starting Time</span>
+      <span>Početak</span>
       <ElTimePicker
         v-model="appointment.startTime"
         arrow-control
         :disabled-hours="disabledStartHours"
         :disabled-minutes="disabledStartMinutes"
         :disabled-seconds="disabledSeconds"
-        placeholder="Start time"
+        placeholder="Vrijeme dolaska"
         style="width: 220px"
       />
     </div>
     <div class="flex-column">
-      <span>Ending Time</span>
+      <span>Završetak</span>
       <ElTimePicker
         v-model="appointment.endTime"
         arrow-control
         :disabled-hours="disabledEndHours"
         :disabled-minutes="disabledEndMinutes"
         :disabled-seconds="disabledSeconds"
-        placeholder="Start time"
+        placeholder="Vrijeme odlaska"
         style="width: 220px"
       />
     </div>
     <div class="flex-column">
-      <span>Log Time</span>
+      <span>Trajanje termina</span>
       <span>{{ timeLog }}</span>
     </div>
     <div class="flex-column" v-if="appointment.date">
@@ -244,7 +245,7 @@ watch(
           'color-danger': selectedRoomState >= 20,
         }"
         >{{ `Room state: ${selectedRoomState}/20` }}
-        <span v-if="selectedRoomState >= 20"> - FULL</span></span
+        <span v-if="selectedRoomState >= 20"> - Popunjeno</span></span
       >
     </div>
     <div class="flex-column">
@@ -253,7 +254,7 @@ watch(
         class="button"
         plain
         @click="saveAppointmentHandler"
-        >Confirm</ElButton
+        >Potvrdi</ElButton
       >
     </div>
   </div>

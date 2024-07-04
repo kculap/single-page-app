@@ -20,30 +20,30 @@ function login() {
 function checkData() {
   if (loginData.value.username.length < 5)
     return ElNotification({
-      title: 'Username error',
-      message: 'Username is too short. Minimum length is 5 chars.',
+      title: 'Greška s korisničkim imenom',
+      message: 'Korisničko ime je prekratko. Najmanja dopuštena dužina je 5 znakova',
       duration: 3000,
       type: 'error',
     });
   // Password check
   else if (passwordModel.value.length < 8)
     return ElNotification({
-      title: 'Password error',
-      message: 'Password is too short. Minimum length is 8 chars.',
+      title: 'Pogreška u lozinci',
+      message: 'Lozinka je prekratka. Najmanja dopuštena dužina je 8 znakova',
       duration: 3000,
       type: 'error',
     });
   else if (passwordModel.value.length > 30)
     return ElNotification({
-      title: 'Password error',
-      message: 'Password is too long. Maximum length is 30 chars.',
+      title: 'Greška u lozinci',
+      message: 'Lozinka je predugačka. Najviše dozvoljeni broj znakova je 30',
       duration: 3000,
       type: 'error',
     });
   else if (!passwordRegex.test(passwordModel.value))
     return ElNotification({
-      title: 'Password error',
-      message: 'Password must contain at least 1 letter and 1 number.',
+      title: 'Greška u lozinci',
+      message: 'Lozinka mora sadržavati barem jedno slovo i jedan broj',
       duration: 3000,
       type: 'error',
     });
@@ -59,8 +59,8 @@ async function loginUser() {
     emit('checkForPage');
   } catch (error) {
     ElNotification({
-      title: 'Login error',
-      message: "Username or password doesn't exist.",
+      title: 'Greška prilikom prijave',
+      message: "Korisničko ime ili lozinka ne postoje",
       duration: 3000,
       type: 'error',
     });
@@ -70,21 +70,21 @@ async function loginUser() {
 
 <template>
   <div class="login-container">
-    <h3 class="main-color">Login</h3>
+    <h3 class="main-color">Prijava</h3>
     <ElInput
       v-model="loginData.username"
-      placeholder="Username"
+      placeholder="Korisničko ime"
       @keyup.enter="login"
     />
     <ElInput
       v-model="passwordModel"
-      placeholder="Password"
+      placeholder="Lozinka"
       show-password
       @keydown.enter="login"
     />
-    <ElButton type="primary" plain @click="login">Login</ElButton>
+    <ElButton type="primary" plain @click="login">Prijava</ElButton>
     <ElLink type="primary" @click="emit('goToRegistration')"
-      >Don't have an account? Go to registration</ElLink
+      >Nemate račun? Registrirajte se</ElLink
     >
   </div>
 </template>
